@@ -1,25 +1,25 @@
-import React from 'react'
-import image1 from '../assets/image1.avif'
-import { LuLeafyGreen } from "react-icons/lu";
-import { GiChickenOven } from "react-icons/gi";
+// src/components/Card.js (Enhanced UI)
+import React from "react";
 
-
-function Card({name,image,id,price,type}) {
-  return (
-    <div className='w-[300px] h-[400px] bg-white p-3 rounded-lg flex flex-col gap-3 shadow-lg hover:border-2 border-green-300 '>
-        <div className='w-[100%] h-[60%] overflow-hidden rounded-lg'>
-            <img src={image} alt="" className='object-cover' />
-        </div> 
-
-        <div className='text-2xl font-semibold'>
-            {name}
+function Card({ name, image, price, id, type, addToCart, toggleFavorite, isFavorite }) {
+    return (
+        <div className="w-[250px] p-4 bg-white shadow-xl rounded-2xl flex flex-col items-center gap-3 transition transform hover:scale-105 hover:shadow-2xl">
+            <img src={image} alt={name} className="w-[220px] h-[160px] object-cover rounded-xl" />
+            <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
+            <p className="text-gray-600 font-medium">Price: <span className="text-blue-600 font-bold">₹{price}</span></p>
+            <p className={`text-sm font-bold ${type === "veg" ? "text-green-500" : "text-red-500"}`}>{type === "veg" ? "Vegetarian" : "Non-Vegetarian"}</p>
+            <div className="flex gap-3 mt-3">
+                {/* 🛒 Add to Cart Button */}
+                <button onClick={addToCart} className="px-5 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 transition-all duration-300">
+                    Add to Cart
+                </button>
+                {/* ⭐ Favorite Toggle Button */}
+                <button onClick={toggleFavorite} className="px-5 py-2 text-yellow-500 font-medium rounded-lg shadow-md border border-yellow-500 hover:bg-yellow-500 hover:text-white transition-all duration-300">
+                    {isFavorite ? "★ Favorited" : "☆ Favorite"}
+                </button>
+            </div>
         </div>
-        <div className='w-full flex justify-between items-center'>
-            <div className='text-lg font-bold text-green-500'>Rs {price}/-</div>
-          <div className='flex justify-center items-center gap-2 text-green-500 text-lg font-semibold'>{type === "veg" ?<LuLeafyGreen />: <GiChickenOven />}<span>{type}</span></div>
-        </div>
-        <button className='w-full p-3 bg-green-500 rounded-lg text-white hover:bg-green-400 transition-all'>Add to dish</button>
-    </div>
-  )
+    );
 }
-export default Card
+
+export default Card;
